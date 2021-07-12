@@ -1,4 +1,4 @@
-##################################### CHALLENGE EVENTSTORE MASTER ######################################
+# CHALLENGE EVENTSTORE MASTER
 
 This application was created to store Events as well as filter them by Type and Time.
 
