@@ -1,53 +1,50 @@
-# Implement EventStore
+##################################### CHALLENGE EVENTSTORE MASTER ######################################
 
-In this challenge, you will create a class that implements the `EventStore` 
-interface.
- 
-```java
-public interface EventStore {
-    void insert(Event event);
+This application was created to store Events as well as filter them by Type and Time.
 
-    void removeAll(String type);
+*** HTTP ROUTES: ***
+- GET http://localhost:8080/event - Returns all Events on repository.
+- POST http://localhost:8080/event - Stores an Event.
+  Body Sample:
+  {
+  	"type" : "Test",
+  	"timestamp" : 123456
+  }
+- DELETE http://localhost:8080/event/{type} - Removes all Events of given type.
+- GET http://localhost:8080/query?type={type}&startTime={startTime}&endTime={endTime} - Generates an
+  EventIterator of given type and timestamp range.
+- GET http://localhost:8080/query/next - Iterates to the next Event from the generated Query.
+- GET http://localhost:8080/query/current - Returns current selected Event from the generated Query.
+- DELETE http://localhost:8080/query/current - Removes current Event from the generated Query and from 
+  Repository
 
-    EventIterator query(String type, long startTime, long endTime);
-}
-```
+*** LIBRARIES USED: ***
+- JUnit - Pre-installed to create automated test enviroments.
+- Spring Framework Starter - Utilized to transform the application into an MVC webservice.
+- Spring Framework Data JPA - Utilized to access objects from the database and create custom queries.
+- H2 Database - Utilized to create an H2 in-memory Database.
 
-Your implementation should store events in memory, using any data structures 
-you see fit for the task. The required behavior for the interface is described in the
-provided code javadocs, please see `EventStore` and `EventIterator`
-interfaces inside the `src/main/java` directory.
- 
-The implementation should be correct, fast, memory-efficient, and thread-safe. 
-You may consider that insertions, deletions, queries, and iterations 
-will happen frequently and concurrently. This will be a system hotspot. Optimize at will. 
+*** THREAD SAFETY: ***
+This Application is on a Transaction Control on the EventIteratorClass and EventStoreClass, so it would 
+maintain thread safety as well as data safety. The Atomicity is also implemented on counters and flags.
 
-We expect you to:
-* Write tests;
-* Provide some evidence of thread-safety;
-* Justify design choices, arguing about costs 
-  and benefits involved. You may write those as comments 
-  inline or, if you wish, provide a separate document 
-  summarizing those choices;
-* Write all code and documentation in english.
-  
-You may use external libraries, but their use has to be 
-properly justified as well.
- 
-This challenge is intentionally simple, we expect a simple,
-elegant, and polished solution. There is no unique solution to this challenge. 
-The intent is to evaluate candidate's coding proficiency and familiarity with 
-tools and best practices.
+*** METHODS: ***
+- EventStoreClass
+  > insert(Event event).
+  > removeAll(String type).
+  > query(String type, long startTime, long endTime).
 
+- EventIteratorClass
+  > moveNext().
+  > current().
+  > remove().
+  > close().
 
-## Solve this challenge
-
-To solve this challenge, you may fork this repository, then 
-send us a link with your implementation. Alternatively, if you do not want to have this repo on
-your profile (we totally get it), send us a 
-[git patch file](https://www.devroom.io/2009/10/26/how-to-create-and-apply-a-patch-with-git/) 
-with your changes.
-
-If you are already in the hiring process, you may send it to 
- whoever is your contact at Intelie. If you wish to apply for a job at 
- Intelie, please send your solution to [trabalhe@intelie.com.br](mailto:trabalhe@intelie.com.br).
+- EventController
+  > all().
+  > newEvent(Event event).
+  > deleteEventsByType(String type).
+  > query(String type, long startTime, long endTime).
+  > moveNext().
+  > currentEvent().
+  > removeEvent().

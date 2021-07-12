@@ -1,0 +1,9 @@
+net\intelie\challenges\EventIterator.class
+net\intelie\challenges\EventStore.class
+net\intelie\challenges\EventController.class
+net\intelie\challenges\EventStoreChallenge.class
+net\intelie\challenges\EventIteratorClass.class
+net\intelie\challenges\EventRepository.class
+net\intelie\challenges\Event.class
+net\intelie\challenges\EventStoreClass.class
+net\intelie\challenges\LoadEvents.class

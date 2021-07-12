@@ -15,7 +15,6 @@ public interface EventStore {
      */
     void insert(Event event);
 
-
     /**
      * Removes all events of specific type.
      *

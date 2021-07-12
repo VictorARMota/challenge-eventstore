@@ -11,7 +11,7 @@ public class EventTest {
 
         //THIS IS A WARNING:
         //Some of us (not everyone) are coverage freaks.
-        assertEquals(123L, event.timestamp());
-        assertEquals("some_type", event.type());
+        assertEquals(123L, event.getTimestamp());
+        assertEquals("some_type", event.getType());    
     }
 }
